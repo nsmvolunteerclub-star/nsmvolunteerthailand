@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Flash Training - อบรมสายฟ้าแลบ | NSM Thailand</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'nsm-blue': {
+                            DEFAULT: '#0066CC', // Science Blue approximation
+                            light: '#3385D6',
+                            dark: '#004C99',
+                            100: '#E6F0FA',
+                            900: '#001933',
+                        },
+                        'flash-yellow': '#FFCC00',
+                    },
+                    fontFamily: {
+                        sans: ['Sarabun', 'sans-serif'], // Thai font
+                        heading: ['Prompt', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-x': 'bounce-x 1s infinite',
+                    },
+                    keyframes: {
+                        'bounce-x': {
+                            '0%, 100%': { transform: 'translateX(0)' },
+                            '50%': { transform: 'translateX(25%)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Prompt (Headings) & Sarabun (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&family=Sarabun:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        /* Custom Styles for extra polish */
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Prompt', sans-serif;
+        }
+        .hero-pattern {
+            background-color: #0066CC;
+            background-image: radial-gradient(circle at 100% 50%, transparent 20%, rgba(255,255,255,.03) 21%, rgba(255,255,255,.03) 34%, transparent 35%, transparent),
+                              radial-gradient(circle at 0% 50%, transparent 20%, rgba(255,255,255,.03) 21%, rgba(255,255,255,.03) 34%, transparent 35%, transparent);
+            background-size: 60px 60px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-24 items-center">
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-4 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <selection-tag><div class="w-16 h-16 md:w-15 md:h-20 flex items-center justify-center shrink-0 overflow-hidden">
+                        <!-- เปลี่ยนลิงก์รูปภาพโลโก้ใน src ด้านล่างนี้ -->
+                        <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/Thai_National_Science_Museum_logo_2.svg/3840px-Thai_National_Science_Museum_logo_2.svg.png?utm_source=th.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail$0" alt="NSM Logo" class="w-full h-full object-contain">
+                    </div></selection-tag>
+                    <div>
+                        <h1 class="font-heading font-bold text-xl text-nsm-blue-dark leading-tight">The Flash Training</h1>
+                        <p class="font-heading text-xs text-gray-500 font-medium">อบรมสายฟ้าแลบ | กองอาสาสมัคร</p>
+                    </div>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="font-heading hidden md:flex items-center space-x-8">
+                    <a href="#about-nsm" class="text-gray-600 hover:text-nsm-blue font-medium transition-colors">รู้จัก อพวช.</a>
+                    <a href="#rules" class="text-gray-600 hover:text-nsm-blue font-medium transition-colors">ระเบียบปฏิบัติ</a>
+                    <a href="#training" class="text-gray-600 hover:text-nsm-blue font-medium transition-colors">เริ่มเรียนรู้</a>
+                    <a href="#contact" class="px-6 py-2.5 rounded-full bg-nsm-blue text-white font-medium hover:bg-nsm-blue-dark transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">ติดต่อเรา</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-nsm-blue focus:outline-none p-2 rounded-md">
+                        <i class="ph ph-list text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="font-heading md:hidden hidden bg-white border-t border-gray-100 px-4 pt-2 pb-6 space-y-2 shadow-lg absolute w-full">
+            <a href="#about-nsm" class="block px-4 py-3 text-gray-600 hover:bg-nsm-blue-100 hover:text-nsm-blue rounded-lg font-medium">รู้จัก อพวช.</a>
+            <a href="#rules" class="block px-4 py-3 text-gray-600 hover:bg-nsm-blue-100 hover:text-nsm-blue rounded-lg font-medium">ระเบียบปฏิบัติ</a>
+            <a href="#training" class="block px-4 py-3 text-gray-600 hover:bg-nsm-blue-100 hover:text-nsm-blue rounded-lg font-medium">เริ่มเรียนรู้</a>
+            <a href="#contact" class="block px-4 py-3 mt-4 text-center bg-nsm-blue text-white rounded-lg font-medium shadow-md">ติดต่อเรา</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <!-- เปลี่ยนพื้นหลังได้โดยแก้ URL ใน bg-[url('...')] หรือใช้ hero-pattern เดิม -->
+    <header class="font-heading relative text-white pt-24 pb-32 overflow-hidden bg-nsm-blue bg-[url('https://github.com/nsmvolunteerclub-star/nsmvolunteerthailand/blob/bf6bf185842edca55ed2b9c316934d862163678f/backdrop.png?raw=true')] bg-cover bg-center bg-no-repeat bg-blend-overlay">
+        
+        <!-- Overlay สีน้ำเงินทับรูปภาพ เพื่อให้ข้อความอ่านง่ายขึ้น ปรับ opacity (เช่น /80, /90) ได้ตามต้องการ -->
+        <div class="absolute inset-100 bg-nsm-blue/0 backdrop-blur-sm z-0"></div>
+
+        <!-- Abstract Shapes (ยังคงไว้ แต่คุณสามารถลบได้ถ้าไม่ชอบ) -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-flash-yellow rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse z-0"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-1000 z-0"></div>
+
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Text Content: จัดให้อยู่ตรงกลาง (text-center, flex-col, items-center) -->
+            <div class="flex flex-col items-center text-center">
+                
+                <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8 text-sm font-medium shadow-sm">
+                    <i class="ph-fill ph-lightning text-flash-yellow text-lg"></i>
+                    <span>ยินดีต้อนรับอาสาสมัครใหม่ NSM Thailand</span>
+                </div>
+                
+                <!-- ส่วนที่เปลี่ยนจากข้อความเป็นรูปภาพ -->
+                <div class="w-full max-w-3xl mx-auto mb-6 flex justify-center">
+                    <!-- นำลิงก์รูปภาพกราฟิก/โลโก้ที่คุณออกแบบไว้มาใส่ในส่วน src="..." ด้านล่างนี้ -->
+                    <img src="https://github.com/nsmvolunteerclub-star/nsmvolunteerthailand/blob/main/ChatGPT%20Image%2016%20%E0%B8%81.%E0%B8%A2.%202569%2013_43_53.png?raw=true" alt="The Flash Training Graphic" class="w-full h-auto object-contain drop-shadow-lg max-h-[150px] md:max-h-[250px] hover:scale-105 transition-transform duration-300">
+                </div>
+                
+                <p class="text-lg md:text-xl text-blue-50 mb-10 max-w-2xl mx-auto drop-shadow-sm leading-relaxed">
+                    เรียนรู้ไว เข้าใจง่าย พร้อมปฏิบัติงานจริง! <br class="hidden md:block">
+                    สำหรับอาสาสมัครองค์การพิพิธภัณฑ์วิทยาศาสตร์แห่งชาติ
+                </p>
+                
+                <!-- Buttons: จัดให้อยู่ตรงกลาง (justify-center) -->
+                <div class="flex flex-col sm:flex-row gap-5 justify-center w-full sm:w-auto">
+                    <a href="#training" class="px-8 py-4 rounded-full bg-gradient-to-r from-flash-yellow via-yellow-400 to-amber-400 text-nsm-blue-900 font-heading font-bold text-lg hover:scale-105 transition-all duration-300 shadow-xl shadow-yellow-500/20 flex items-center justify-center gap-3 group border border-yellow-200">
+                        <span class="bg-nsm-blue-900 text-flash-yellow rounded-full w-7 h-7 flex items-center justify-center text-sm shadow-inner">
+                            <i class="ph-bold ph-lightning"></i>
+                        </span>
+                        เริ่มการอบรมเลย
+                        <i class="ph-bold ph-arrow-right group-hover:translate-x-1.5 transition-transform"></i>
+                    </a>
+                    <a href="#about-nsm" class="px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 border-2 border-white/40 text-white font-medium text-lg backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-2.5 shadow-lg hover:shadow-xl hover:scale-105">
+                        <i class="ph-duotone ph-info text-xl text-flash-yellow"></i>
+                        ข้อมูลเบื้องต้น
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- Bottom Wave -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-0">
+            <svg class="relative block w-full h-14 md:h-28" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0 C150,90 350,-40 500,45 C650,130 900,10 1200,60 L1200,120 L0,120 Z" class="fill-gray-50 opacity-90"></path>
+                <path d="M0,30 C200,110 400,-10 600,60 C800,130 1000,20 1200,80 L1200,120 L0,120 Z" class="fill-gray-50"></path>
+            </svg>
+        </div>
+    </header>
+
+    <!-- About NSM Section -->
+    <section id="about-nsm" class="py-20 bg-gray-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-nsm-blue-900 mb-4">รู้จัก อพวช. ภายใน 1 นาที ⏱️</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">NSM Thailand หรือ องค์การพิพิธภัณฑ์วิทยาศาสตร์แห่งชาติ แหล่งเรียนรู้วิทยาศาสตร์อันดับ 1 ของไทย</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Info Card 1 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+                    <div class="w-14 h-14 bg-nsm-blue-100 rounded-2xl flex items-center justify-center mb-6 relative z-10">
+                        <i class="ph-duotone ph-buildings text-3xl text-nsm-blue"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-gray-800 mb-3 relative z-10">3 พิพิธภัณฑ์หลัก (คลองห้า)</h3>
+                    <ul class="space-y-2 text-gray-600 relative z-10 text-sm">
+                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>พิพิธภัณฑ์วิทยาศาสตร์ (ตึกลูกเต๋า)</li>
+                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>พิพิธภัณฑ์ธรรมชาติวิทยา</li>
+                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>พิพิธภัณฑ์เทคโนโลยีสารสนเทศ</li>
+                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>พิพิธภัณฑ์พระรามเก้า</li>
+                    </ul>
+                </div>
+
+                <!-- Info Card 2 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-50 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+                    <div class="w-14 h-14 bg-yellow-100 rounded-2xl flex items-center justify-center mb-6 relative z-10">
+                        <i class="ph-duotone ph-target text-3xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-gray-800 mb-3 relative z-10">เป้าหมายหลักของเรา</h3>
+                    <p class="text-gray-600 relative z-10 text-sm leading-relaxed">
+                        สร้างความตระหนักด้านวิทยาศาสตร์ให้สังคมไทย ส่งเสริมการเรียนรู้ตลอดชีวิต (Lifelong Learning) ผ่านนิทรรศการและกิจกรรมที่สนุกสนาน เข้าใจง่าย 
+                    </p>
+                </div>
+
+                <!-- Info Card 3 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-green-50 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+                    <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mb-6 relative z-10">
+                        <i class="ph-duotone ph-users-three text-3xl text-green-600"></i>
+                    </div>
+                    <h3 class="font-heading text-xl font-bold text-gray-800 mb-3 relative z-10">บทบาทอาสาสมัคร</h3>
+                    <p class="text-gray-600 relative z-10 text-sm leading-relaxed">
+                        คุณคือ "ทูตวิทยาศาสตร์" ที่จะช่วยอำนวยความสะดวก ให้คำแนะนำ และร่วมสร้างรอยยิ้มให้กับผู้เข้าชมทุกคน (ดูแลโดย สำนักบริการผู้เข้าชม)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules Section -->
+    <section id="rules" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-heading font-bold text-nsm-blue-900 mb-6">
+                        ระเบียบปฏิบัติเบื้องต้น<br>
+                        <span class="text-nsm-blue">Do's & Don'ts</span>
+                    </h2>
+                    <p class="text-gray-600 mb-8">ข้อควรรู้เพื่อให้การปฏิบัติงานของคุณเป็นไปอย่างราบรื่น ปลอดภัย และเป็นมืออาชีพ</p>
+                    
+                    <div class="space-y-6">
+                        <!-- Do's -->
+                        <div class="bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+                            <h3 class="font-heading font-bold text-lg text-blue-800 mb-4 flex items-center gap-2">
+                                <i class="ph-fill ph-check-circle text-green-500 text-2xl"></i> สิ่งที่ควรทำ (Do)
+                            </h3>
+                            <ul class="space-y-3 text-sm text-gray-700">
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-0.5 w-5 h-5 rounded-full bg-blue-200 flex items-center justify-center shrink-0"><span class="text-xs font-bold text-blue-800">1</span></div>
+                                    <span>แต่งกายสุภาพตามระเบียบ หรือสวมเสื้อ/ป้ายอาสาสมัครตลอดเวลาปฏิบัติงาน</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-0.5 w-5 h-5 rounded-full bg-blue-200 flex items-center justify-center shrink-0"><span class="text-xs font-bold text-blue-800">2</span></div>
+                                    <span>มาตรงต่อเวลา ลงชื่อเข้า-ออกงาน ตามจุดที่กำหนด</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-0.5 w-5 h-5 rounded-full bg-blue-200 flex items-center justify-center shrink-0"><span class="text-xs font-bold text-blue-800">3</span></div>
+                                    <span>ยิ้มแย้มแจ่มใส พร้อมช่วยเหลือผู้เข้าชมด้วยความเต็มใจ</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <div class="mt-0.5 w-5 h-5 rounded-full bg-blue-200 flex items-center justify-center shrink-0"><span class="text-xs font-bold text-blue-800">4</span></div>
+                                    <span>หากมีข้อสงสัยหรือไม่แน่ใจ ให้สอบถามเจ้าหน้าที่พี่เลี้ยงทันที</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Don'ts -->
+                        <div class="bg-red-50/50 p-6 rounded-2xl border border-red-100">
+                            <h3 class="font-heading font-bold text-lg text-red-800 mb-4 flex items-center gap-2">
+                                <i class="ph-fill ph-x-circle text-red-500 text-2xl"></i> สิ่งที่ห้ามทำ (Don't)
+                            </h3>
+                            <ul class="space-y-3 text-sm text-gray-700">
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-bold ph-x text-red-400 mt-0.5 shrink-0"></i>
+                                    <span>เล่นโทรศัพท์มือถือ หรือทำธุระส่วนตัวขณะให้บริการผู้เข้าชม</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-bold ph-x text-red-400 mt-0.5 shrink-0"></i>
+                                    <span>รับประทานอาหารหรือเครื่องดื่มในพื้นที่จัดแสดงนิทรรศการ</span>
+                                </li>
+                                <li class="flex items-start gap-3">
+                                    <i class="ph-bold ph-x text-red-400 mt-0.5 shrink-0"></i>
+                                    <span>ให้ข้อมูลผิดๆ แก่ผู้เข้าชม (หากไม่ทราบ ให้หาเจ้าหน้าที่มาช่วยตอบ)</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/2 w-full">
+                    <!-- Graphic/Image for Rules -->
+                    <div class="relative bg-gray-100 rounded-3xl overflow-hidden aspect-video shadow-inner flex items-center justify-center p-8">
+                         <!-- Decorative background elements -->
+                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#0066CC_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                        
+                        <div class="relative z-10 w-full max-w-sm bg-white rounded-2xl shadow-xl p-6 transform -rotate-2">
+                            <div class="flex items-center justify-between border-b pb-4 mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-nsm-blue rounded-full flex items-center justify-center text-white">
+                                        <i class="ph ph-identification-card text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-heading font-bold text-gray-800 text-sm">บัตรประจำตัวอาสาสมัคร</p>
+                                        <p class="text-xs text-gray-500">NSM Volunteer ID</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="h-2 bg-gray-200 rounded w-3/4"></div>
+                                <div class="h-2 bg-gray-200 rounded w-1/2"></div>
+                                <div class="flex gap-2 mt-4">
+                                    <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded font-medium">สวมใส่ตลอดเวลา</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Training Section -->
+    <section id="training" class="py-20 bg-nsm-blue-900 text-white relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-nsm-blue rounded-full mix-blend-screen filter blur-[100px] opacity-50"></div>
+        <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-flash-yellow rounded-full mix-blend-multiply filter blur-[80px] opacity-30"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-flash-yellow font-bold tracking-wider uppercase text-sm mb-2 block">Core Modules</span>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold mb-4">หลักสูตรอบรมสายฟ้าแลบ ⚡</h2>
+                <p class="text-blue-100 max-w-2xl mx-auto">เลือกหัวข้อด้านล่างเพื่อเริ่มเรียนรู้ทีละขั้นตอน เมื่ออ่านจบให้คลิกปุ่มเพื่อรับทราบข้อมูล</p>
+            </div>
+
+            <!-- Training Modules (Interactive) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="module-container">
+                
+                <!-- Module 1 -->
+                <div class="glass-card rounded-2xl p-6 text-gray-800 flex flex-col h-full transform transition duration-300 hover:-translate-y-2 cursor-pointer" onclick="openModal(1)">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-nsm-blue mb-4">
+                        <span class="font-heading font-bold text-xl">01</span>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg mb-2">จุดให้บริการ</h3>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">แผนที่คร่าวๆ และจุดประจำการหลักของอาสาสมัครในแต่ละพิพิธภัณฑ์</p>
+                    <div class="flex items-center justify-between text-sm font-medium text-nsm-blue mt-auto">
+                        <span>เรียนรู้ 2 นาที</span>
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </div>
+                    <!-- Status indicator (hidden initially) -->
+                    <div id="status-1" class="hidden absolute top-4 right-4 w-6 h-6 bg-green-500 rounded-full text-white flex items-center justify-center">
+                        <i class="ph-bold ph-check"></i>
+                    </div>
+                </div>
+
+                <!-- Module 2 -->
+                <div class="glass-card rounded-2xl p-6 text-gray-800 flex flex-col h-full transform transition duration-300 hover:-translate-y-2 cursor-pointer" onclick="openModal(2)">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-nsm-blue mb-4">
+                        <span class="font-heading font-bold text-xl">02</span>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg mb-2">การรับมือเหตุฉุกเฉิน</h3>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">ขั้นตอนการรายงานเมื่อเด็กพลัดหลง ผู้ป่วย หรือเกิดอุบัติเหตุ</p>
+                    <div class="flex items-center justify-between text-sm font-medium text-nsm-blue mt-auto">
+                        <span>เรียนรู้ 3 นาที</span>
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </div>
+                    <div id="status-2" class="hidden absolute top-4 right-4 w-6 h-6 bg-green-500 rounded-full text-white flex items-center justify-center">
+                        <i class="ph-bold ph-check"></i>
+                    </div>
+                </div>
+
+                <!-- Module 3 -->
+                <div class="glass-card rounded-2xl p-6 text-gray-800 flex flex-col h-full transform transition duration-300 hover:-translate-y-2 cursor-pointer" onclick="openModal(3)">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-nsm-blue mb-4">
+                        <span class="font-heading font-bold text-xl">03</span>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg mb-2">ทักษะการสื่อสาร</h3>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">เทคนิคการพูดคุยกับผู้เข้าชมหลากหลายวัย และการตอบคำถามเบื้องต้น</p>
+                    <div class="flex items-center justify-between text-sm font-medium text-nsm-blue mt-auto">
+                        <span>เรียนรู้ 2 นาที</span>
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </div>
+                    <div id="status-3" class="hidden absolute top-4 right-4 w-6 h-6 bg-green-500 rounded-full text-white flex items-center justify-center">
+                        <i class="ph-bold ph-check"></i>
+                    </div>
+                </div>
+
+                <!-- Module 4 -->
+                <div class="glass-card rounded-2xl p-6 text-gray-800 flex flex-col h-full transform transition duration-300 hover:-translate-y-2 cursor-pointer" onclick="openModal(4)">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-nsm-blue mb-4">
+                        <span class="font-heading font-bold text-xl">04</span>
+                    </div>
+                    <h3 class="font-heading font-bold text-lg mb-2">สวัสดิการอาสาสมัคร</h3>
+                    <p class="text-sm text-gray-600 mb-4 flex-grow">เบี้ยเลี้ยง อาหารกลางวัน การรับใบประกาศนียบัตร และสิทธิพิเศษ</p>
+                    <div class="flex items-center justify-between text-sm font-medium text-nsm-blue mt-auto">
+                        <span>เรียนรู้ 1 นาที</span>
+                        <i class="ph-bold ph-arrow-right"></i>
+                    </div>
+                    <div id="status-4" class="hidden absolute top-4 right-4 w-6 h-6 bg-green-500 rounded-full text-white flex items-center justify-center">
+                        <i class="ph-bold ph-check"></i>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="mt-12 text-center">
+                <button id="finish-btn" class="hidden px-8 py-4 rounded-full bg-green-500 text-white font-heading font-bold text-lg hover:bg-green-600 transition-all shadow-lg shadow-green-500/30 items-center justify-center gap-2 mx-auto animate-bounce-x">
+                    <i class="ph-bold ph-check-circle text-2xl"></i>
+                    สำเร็จการอบรมสายฟ้าแลบ!
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Modal (Hidden by default) -->
+    <div id="content-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="bg-white rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto relative z-10 shadow-2xl flex flex-col">
+            <!-- Header -->
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center sticky top-0 bg-white/95 backdrop-blur-sm rounded-t-3xl">
+                <h3 id="modal-title" class="font-heading font-bold text-2xl text-nsm-blue-900">หัวข้อ</h3>
+                <button onclick="closeModal()" class="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 transition-colors">
+                    <i class="ph-bold ph-x text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Body -->
+            <div id="modal-body" class="p-6 text-gray-700 space-y-4">
+                <!-- Content injected via JS -->
+            </div>
+            
+            <!-- Footer -->
+            <div class="p-6 border-t border-gray-100 bg-gray-50 rounded-b-3xl mt-auto">
+                <button id="mark-read-btn" class="w-full py-4 rounded-xl bg-nsm-blue text-white font-bold font-heading hover:bg-nsm-blue-dark transition-colors flex justify-center items-center gap-2 shadow-md">
+                    รับทราบและเข้าใจเนื้อหา <i class="ph-bold ph-check-circle"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact & Footer -->
+    <footer id="contact" class="bg-white pt-20 pb-10 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Brand -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-16 h-16 rounded-lg flex items-center justify-center overflow-hidden bg-white">
+                            <!-- เปลี่ยนลิงก์รูปภาพโลโก้ใน src ด้านล่างนี้ (สำหรับส่วน Footer) -->
+                            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/0/03/Thai_National_Science_Museum_logo_2.svg/3840px-Thai_National_Science_Museum_logo_2.svg.png?utm_source=th.wikipedia.org&utm_campaign=imageinfo&utm_content=thumbnail$0" alt="NSM Logo" class="w-full h-full object-contain">
+                        </div>
+                        <h4 class="font-heading font-bold text-2xl text-gray-900">The Flash Training</h4>
+                    </div>
+                    <p class="text-gray-600 mb-6 max-w-md">
+                        ระบบอบรมออนไลน์สำหรับอาสาสมัครใหม่ จัดทำโดย กองอาสาสมัคร สำนักบริการผู้เข้าชม องค์การพิพิธภัณฑ์วิทยาศาสตร์แห่งชาติ (อพวช.)
+                    </p>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h5 class="font-heading font-bold text-gray-900 mb-4">ติดต่อกองอาสาสมัคร</h5>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-center gap-2">
+                            <i class="ph-fill ph-phone text-nsm-blue text-lg"></i>
+                            <span>0 2577 9999 ต่อ 2133</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="ph-fill ph-envelope-simple text-nsm-blue text-lg"></i>
+                            <span>volunteer@nsm.or.th</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="ph-fill ph-map-pin text-nsm-blue text-lg mt-0.5"></i>
+                            <span>อพวช. คลองห้า ปทุมธานี</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h5 class="font-heading font-bold text-gray-900 mb-4">ลิงก์ที่เกี่ยวข้อง</h5>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li><a href="https://www.nsm.or.th" target="_blank" class="hover:text-nsm-blue transition-colors">เว็บไซต์หลัก อพวช.</a></li>
+                        <li><a href="#" class="hover:text-nsm-blue transition-colors">ดาวน์โหลดคู่มืออาสาสมัคร (PDF)</a></li>
+                        <li><a href="#" class="hover:text-nsm-blue transition-colors">ตารางเวรปฏิบัติงาน</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-500">
+                    &copy; 2026 NSM Thailand. กองอาสาสมัคร สำนักบริการผู้เข้าชม.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-nsm-blue hover:text-white transition-colors"><i class="ph-fill ph-facebook-logo"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-nsm-blue hover:text-white transition-colors"><i class="ph-fill ph-line-logo"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // --- 1. Mobile Menu Toggle ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // --- 2. Navbar Scroll Effect ---
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-md');
+                nav.classList.remove('shadow-sm');
+            } else {
+                nav.classList.add('shadow-sm');
+                nav.classList.remove('shadow-md');
+            }
+        });
+
+        // --- 3. Training Module Logic ---
+        
+        // Data for modules
+        const moduleData = {
+            1: {
+                title: 'จุดให้บริการหลัก (Service Points)',
+                content: `
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-100 mb-4">
+                            <strong>หน้าที่หลัก:</strong> ประจำจุดต่างๆ เพื่อคอยต้อนรับ แนะนำเส้นทาง และอำนวยความสะดวก
+                        </div>
+                        <h4 class="font-bold text-gray-800">จุดหลักๆ ที่อาสาสมัครมักจะได้ประจำการ:</h4>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li><strong>จุดตรวจบัตร/ทางเข้า:</strong> ต้อนรับ, ตรวจเช็คสติกเกอร์/บัตรเข้าชม, แนะนำกฎระเบียบเบื้องต้น</li>
+                            <li><strong>จุดประชาสัมพันธ์ (Information):</strong> ตอบคำถามทั่วไป, รอบฉายโดม, รอบการแสดงวิทยาศาสตร์</li>
+                            <li><strong>ภายในนิทรรศการ:</strong> ดูแลความเรียบร้อย, แนะนำวิธีการเล่นชิ้นงาน (Hands-on), คอยเตือนหากผู้เข้าชมเล่นรุนแรง</li>
+                        </ul>
+                        <p class="text-sm text-gray-500 mt-4">*รายละเอียดจุดประจำการที่แน่นอน จะได้รับมอบหมายจากพี่เลี้ยงในแต่ละวัน</p>
+                    </div>
+                `
+            },
+            2: {
+                title: 'การรับมือเหตุฉุกเฉิน (Emergency Response)',
+                content: `
+                    <div class="space-y-4">
+                        <p>ความปลอดภัยของผู้เข้าชมสำคัญที่สุด! หากเกิดเหตุการณ์เหล่านี้ นี่คือสิ่งที่คุณต้องทำ:</p>
+                        
+                        <div class="border-l-4 border-yellow-400 pl-4 py-2">
+                            <h4 class="font-bold text-gray-800">👶 เด็กพลัดหลง</h4>
+                            <p class="text-sm">1. ปลอบเด็กให้สงบ 2. ห้ามพาเดินหาเด็ดขาด! 3. แจ้ง รปภ. หรือพี่เลี้ยงใกล้ที่สุดทันที (แจ้งลักษณะเด็ก เสื้อผ้า)</p>
+                        </div>
+
+                        <div class="border-l-4 border-red-500 pl-4 py-2">
+                            <h4 class="font-bold text-gray-800">🤕 อุบัติเหตุ / ผู้ป่วย</h4>
+                            <p class="text-sm">1. กันคนมุงดู 2. ห้ามเคลื่อนย้ายผู้บาดเจ็บ (ยกเว้นอันตรายถึงชีวิต) 3. วอแจ้ง หรือเรียกเจ้าหน้าที่ รปภ./พี่เลี้ยง เพื่อตามพยาบาลทันที</p>
+                        </div>
+
+                        <div class="bg-gray-100 p-4 rounded-lg mt-4 text-center font-medium">
+                            <span class="text-red-600">กฎเหล็ก:</span> "ตั้งสติ และ แจ้งเจ้าหน้าที่หลักทันที"
+                        </div>
+                    </div>
+                `
+            },
+            3: {
+                title: 'ทักษะการสื่อสาร (Communication Skills)',
+                content: `
+                    <div class="space-y-4">
+                        <p>การสื่อสารที่ดีช่วยสร้างความประทับใจให้ผู้เข้าชม</p>
+                        
+                        <ul class="space-y-3">
+                            <li class="flex gap-3">
+                                <i class="ph-fill ph-smiley text-yellow-500 text-xl shrink-0"></i>
+                                <span><strong>ยิ้มทักทาย:</strong> "สวัสดีครับ/ค่ะ ยินดีต้อนรับสู่ อพวช. ครับ/ค่ะ"</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <i class="ph-fill ph-ear text-blue-500 text-xl shrink-0"></i>
+                                <span><strong>รับฟัง:</strong> ตั้งใจฟังคำถามของผู้เข้าชม หากไม่แน่ใจคำตอบ อย่าเดา! ให้ตอบว่า "เดี๋ยวสักครู่นะคะ/ครับ ขออนุญาตสอบถามเจ้าหน้าที่ให้ค่ะ"</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <i class="ph-fill ph-hand-waving text-green-500 text-xl shrink-0"></i>
+                                <span><strong>ภาษากาย:</strong> ผายมือบอกทางแทนการชี้หน้า สบตาผู้พูด และมีบุคลิกภาพที่กระตือรือร้น</span>
+                            </li>
+                        </ul>
+                    </div>
+                `
+            },
+            4: {
+                title: 'สวัสดิการอาสาสมัคร (Volunteer Benefits)',
+                content: `
+                    <div class="space-y-4">
+                        <p>อพวช. ขอบคุณในความเสียสละของคุณ นี่คือสวัสดิการเบื้องต้นที่คุณจะได้รับ:</p>
+                        
+                        <div class="grid grid-cols-2 gap-4 mt-4">
+                            <div class="bg-green-50 p-3 rounded border border-green-100 text-center">
+                                <i class="ph-duotone ph-money text-3xl text-green-600 mb-2"></i>
+                                <p class="font-bold text-sm">เบี้ยเลี้ยง</p>
+                                <p class="text-xs text-gray-600">ตามระเบียบกำหนด/วัน</p>
+                            </div>
+                            <div class="bg-orange-50 p-3 rounded border border-orange-100 text-center">
+                                <i class="ph-duotone ph-hamburger text-3xl text-orange-600 mb-2"></i>
+                                <p class="font-bold text-sm">อาหารกลางวัน</p>
+                                <p class="text-xs text-gray-600">จัดเตรียมให้ในวันปฏิบัติงาน</p>
+                            </div>
+                            <div class="bg-purple-50 p-3 rounded border border-purple-100 text-center col-span-2">
+                                <i class="ph-duotone ph-certificate text-3xl text-purple-600 mb-2"></i>
+                                <p class="font-bold text-sm">ใบประกาศนียบัตร</p>
+                                <p class="text-xs text-gray-600">เมื่อปฏิบัติงานครบชั่วโมงตามกำหนด (นำไปใส่ Portfolio ได้!)</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // State to track completed modules
+        let completedModules = {
+            1: false,
+            2: false,
+            3: false,
+            4: false
+        };
+        let currentOpenModule = null;
+
+        // Modal Elements
+        const modal = document.getElementById('content-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const markReadBtn = document.getElementById('mark-read-btn');
+        const finishBtn = document.getElementById('finish-btn');
+
+        // Open Modal
+        window.openModal = function(moduleId) {
+            currentOpenModule = moduleId;
+            const data = moduleData[moduleId];
+            
+            modalTitle.innerHTML = `<span class="text-nsm-blue opacity-50 mr-2">0${moduleId}</span> ${data.title}`;
+            modalBody.innerHTML = data.content;
+            
+            // Show modal (using flex instead of hidden)
+            modal.classList.remove('hidden');
+            // Slight delay to allow display to change before adding opacity
+            setTimeout(() => {
+                modal.firstElementChild.classList.add('opacity-100'); // backdrop
+            }, 10);
+            
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        };
+
+        // Close Modal
+        window.closeModal = function() {
+            modal.classList.add('hidden');
+            currentOpenModule = null;
+            document.body.style.overflow = 'auto'; // Restore scroll
+        };
+
+        // Mark as Read Logic
+        markReadBtn.addEventListener('click', () => {
+            if (currentOpenModule) {
+                // Update state
+                completedModules[currentOpenModule] = true;
+                
+                // Update UI visually
+                const statusIcon = document.getElementById(`status-${currentOpenModule}`);
+                statusIcon.classList.remove('hidden');
+                
+                // Add border to card
+                statusIcon.parentElement.classList.add('border-2', 'border-green-400');
+                
+                closeModal();
+                checkAllCompleted();
+            }
+        });
+
+        // Check if all modules are done
+        function checkAllCompleted() {
+            const allDone = Object.values(completedModules).every(status => status === true);
+            if (allDone) {
+                finishBtn.classList.remove('hidden');
+                finishBtn.classList.add('flex'); // Add flex to center icon/text
+                
+                // Custom success message
+                finishBtn.addEventListener('click', () => {
+                    alert('🎉 ยินดีด้วย! คุณผ่านการอบรมสายฟ้าแลบแล้ว เตรียมตัวพบกับพี่เลี้ยงและเริ่มงานได้เลยครับ/ค่ะ');
+                    // In a real app, this would send data to a backend
+                });
+            }
+        }
+    </script>
+</body>
+</html>
