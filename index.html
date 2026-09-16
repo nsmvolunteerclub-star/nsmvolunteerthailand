@@ -121,34 +121,34 @@
     <header class="font-heading relative text-white pt-24 pb-32 overflow-hidden bg-nsm-blue bg-[url('https://github.com/nsmvolunteerclub-star/nsmvolunteerthailand/blob/bf6bf185842edca55ed2b9c316934d862163678f/backdrop.png?raw=true')] bg-cover bg-center bg-no-repeat bg-blend-overlay">
         
         <!-- Overlay สีน้ำเงินทับรูปภาพ เพื่อให้ข้อความอ่านง่ายขึ้น ปรับ opacity (เช่น /80, /90) ได้ตามต้องการ -->
-        <div class="absolute inset-100 bg-nsm-blue/0 backdrop-blur-sm z-0"></div>
+        <div class="absolute inset-200 bg-nsm-blue/0 backdrop-blur-[2px] z-0"></div>
 
         <!-- Abstract Shapes (ยังคงไว้ แต่คุณสามารถลบได้ถ้าไม่ชอบ) -->
         <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-flash-yellow rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse z-0"></div>
         <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-1000 z-0"></div>
 
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <!-- Text Content: จัดให้อยู่ตรงกลาง (text-center, flex-col, items-center) -->
-            <div class="flex flex-col items-center text-center">
+        <selection-tag><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Text Content: มือถือจัดกึ่งกลาง (text-center, items-center), หน้าจอใหญ่ (md:) จัดชิดซ้าย (md:text-left, md:items-start) พร้อมจัดแนวให้เสมอกัน -->
+            <div class="flex flex-col items-center text-center md:items-start md:text-left max-w-3xl md:pl-2">
                 
                 <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8 text-sm font-medium shadow-sm">
                     <i class="ph-fill ph-lightning text-flash-yellow text-lg"></i>
                     <span>ยินดีต้อนรับอาสาสมัครใหม่ NSM Thailand</span>
                 </div>
                 
-                <!-- ส่วนที่เปลี่ยนจากข้อความเป็นรูปภาพ -->
-                <div class="w-full max-w-3xl mx-auto mb-6 flex justify-center">
+                <selection-tag><div class="w-full mb-6 flex justify-center md:justify-start">
                     <!-- นำลิงก์รูปภาพกราฟิก/โลโก้ที่คุณออกแบบไว้มาใส่ในส่วน src="..." ด้านล่างนี้ -->
                     <img src="https://github.com/nsmvolunteerclub-star/nsmvolunteerthailand/blob/main/ChatGPT%20Image%2016%20%E0%B8%81.%E0%B8%A2.%202569%2013_43_53.png?raw=true" alt="The Flash Training Graphic" class="w-full h-auto object-contain drop-shadow-lg max-h-[150px] md:max-h-[250px] hover:scale-105 transition-transform duration-300">
-                </div>
+                </div></selection-tag>
                 
-                <p class="text-lg md:text-xl text-blue-50 mb-10 max-w-2xl mx-auto drop-shadow-sm leading-relaxed">
-                    เรียนรู้ไว เข้าใจง่าย พร้อมปฏิบัติงานจริง! <br class="hidden md:block">
+                <selection-tag><p class="text-base sm:text-lg md:text-xl text-blue-50 mb-10 drop-shadow-sm leading-relaxed max-w-2xl">
+                    เรียนรู้ไว เข้าใจง่าย พร้อมปฏิบัติงานจริง!
+                    <br class="hidden md:block">
                     สำหรับอาสาสมัครองค์การพิพิธภัณฑ์วิทยาศาสตร์แห่งชาติ
-                </p>
+                </p></selection-tag>
                 
-                <!-- Buttons: จัดให้อยู่ตรงกลาง (justify-center) -->
-                <div class="flex flex-col sm:flex-row gap-5 justify-center w-full sm:w-auto">
+                <!-- Buttons: มือถือจัดกึ่งกลาง, หน้าจอใหญ่จัดชิดซ้าย -->
+                <div class="flex flex-col sm:flex-row gap-5 justify-center md:justify-start w-full sm:w-auto">
                     <a href="#training" class="px-8 py-4 rounded-full bg-gradient-to-r from-flash-yellow via-yellow-400 to-amber-400 text-nsm-blue-900 font-heading font-bold text-lg hover:scale-105 transition-all duration-300 shadow-xl shadow-yellow-500/20 flex items-center justify-center gap-3 group border border-yellow-200">
                         <span class="bg-nsm-blue-900 text-flash-yellow rounded-full w-7 h-7 flex items-center justify-center text-sm shadow-inner">
                             <i class="ph-bold ph-lightning"></i>
@@ -163,7 +163,7 @@
                 </div>
             </div>
             
-        </div>
+        </div></selection-tag>
         
         <!-- Bottom Wave -->
         <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-0">
@@ -179,7 +179,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-heading font-bold text-nsm-blue-900 mb-4">รู้จัก อพวช. ภายใน 1 นาที ⏱️</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">NSM Thailand หรือ องค์การพิพิธภัณฑ์วิทยาศาสตร์แห่งชาติ แหล่งเรียนรู้วิทยาศาสตร์อันดับ 1 ของไทย</p>
+                <p style="white-space: nowrap;" class="text-lg text-gray-600 max-w-2xl mx-auto">NSM Thailand หรือ องค์การพิพิธภัณฑ์วิทยาศาสตร์แห่งชาติ แหล่งเรียนรู้วิทยาศาสตร์อันดับ 1 ของไทย</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -189,12 +189,13 @@
                     <div class="w-14 h-14 bg-nsm-blue-100 rounded-2xl flex items-center justify-center mb-6 relative z-10">
                         <i class="ph-duotone ph-buildings text-3xl text-nsm-blue"></i>
                     </div>
-                    <h3 class="font-heading text-xl font-bold text-gray-800 mb-3 relative z-10">3 พิพิธภัณฑ์หลัก (คลองห้า)</h3>
-                    <ul class="space-y-2 text-gray-600 relative z-10 text-sm">
-                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>พิพิธภัณฑ์วิทยาศาสตร์ (ตึกลูกเต๋า)</li>
-                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>พิพิธภัณฑ์ธรรมชาติวิทยา</li>
-                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>พิพิธภัณฑ์เทคโนโลยีสารสนเทศ</li>
-                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>พิพิธภัณฑ์พระรามเก้า</li>
+                    <h3 style="white-space: nowrap;" class="font-heading text-xl font-bold text-gray-800 mb-3 relative z-10">5 พิพิธภัณฑ์หลัก (คลองห้า)</h3>
+                    <ul style="white-space: nowrap;" class="space-y-2 text-gray-600 relative z-10 text-sm">
+                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>พิพิธภัณฑ์วิทยาศาสตร์ (พวท.)</li>
+                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>พิพิธภัณฑ์ธรรมชาติวิทยา (พธช.)</li>
+                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>พิพิธภัณฑ์เทคโนโลยีสารสนเทศ (พทส.)</li>
+                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>พิพิธภัณฑ์พระรามเก้า (พพก.)</li>
+                        <li class="flex items-start gap-2"><i class="ph-bold ph-check text-green-500 mt-0.5"></i>ศูนย์นวัตกรรมแห่งอนาคต Futurium (FTR)</li>
                     </ul>
                 </div>
 
